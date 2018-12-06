@@ -3,7 +3,7 @@
 
 EAPI=7
 
-inherit eutils
+inherit desktop
 
 DESCRIPTION="VS CODE open source"
 HOMEPAGE="https://code.visualstudio.com/"
@@ -61,5 +61,5 @@ src_install() {
 	fperms +x "/opt/${PN}/resources/app/extensions/git/dist/askpass.sh"
 
 	make_desktop_entry "${PN}" "Visual Studio Code" "${PN}" "Development;IDE"
-	doicon ${FILESDIR}/${PN}.png
+	doicon ${WORKDIR}/${P}/resources/linux/code.png
 }
