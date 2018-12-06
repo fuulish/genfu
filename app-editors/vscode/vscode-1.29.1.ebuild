@@ -3,6 +3,8 @@
 
 EAPI=7
 
+inherit eutils
+
 DESCRIPTION="VS CODE open source"
 HOMEPAGE="https://code.visualstudio.com/"
 SRC_URI="https://github.com/Microsoft/vscode/archive/1.29.1.tar.gz"
@@ -10,7 +12,7 @@ SRC_URI="https://github.com/Microsoft/vscode/archive/1.29.1.tar.gz"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
-IUSE=""
+IUSE="-min"
 
 DEPEND="sys-apps/yarn
 net-libs/nodejs
@@ -22,7 +24,6 @@ BDEPEND=""
 
 PYTHON_COMPAT=( python2_7 )
 
-# trying to rely on default src_prepare function and eapply
 PATCHES=(
 	"${FILESDIR}/product.patch"
 	)
@@ -39,21 +40,17 @@ src_compile() {
 	elif [[ "$ARCH" == "arm" ]]; then
 		TARGET="linux-arm"
 	fi
-	TARGET="${TARGET}-min"
+
+	if use min; then
+		TARGET="${TARGET}-min"
+	fi
 
 	gulp vscode-${TARGET} || die
 }
 
 src_install() {
-	#dodir /opt/${PN}
 	insinto /opt/${PN}
 	doins -r ${WORKDIR}/VSCode-linux-x64/*
-
-	#exeinto /opt/${PN}
-	#doexe ${WORKDIR}/code-oss
-
-	#exeinto /opt/${PN}/bin
-	#doexe ${WORKDIR}/bin/code-oss
 
 	dosym "/opt/${PN}/bin/code-oss" "/usr/bin/code"
 
@@ -63,4 +60,6 @@ src_install() {
 	fperms +x "/opt/${PN}/resources/app/node_modules.asar.unpacked/vscode-ripgrep/bin/rg"
 	fperms +x "/opt/${PN}/resources/app/extensions/git/dist/askpass.sh"
 
+	make_desktop_entry "${PN}" "Visual Studio Code" "${PN}" "Development;IDE"
+	doicon ${FILESDIR}/${PN}.png
 }
