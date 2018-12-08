@@ -14,12 +14,16 @@ SLOT="0"
 KEYWORDS="~amd64 ~x86"
 IUSE=""
 
-DEPEND=">=dev-lang/rust
-dev-util/cmake"
-#libz"
+DEPEND=">=dev-lang/rust-1.29
+dev-util/cmake
+sys-libs/zlib"
 RDEPEND="${DEPEND}"
 BDEPEND=""
 
 src_compile() {
-	cargo install bat
+	cargo build
+}
+
+src_install() {
+	dobin target/release/bat
 }
