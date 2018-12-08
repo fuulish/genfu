@@ -21,9 +21,9 @@ RDEPEND="${DEPEND}"
 BDEPEND=""
 
 src_compile() {
-	cargo build
+	cargo build --release
 }
 
 src_install() {
-	dobin target/release/bat
+	dobin ${WORKDIR}/${P}/target/release/bat
 }
