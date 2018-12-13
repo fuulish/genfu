@@ -45,7 +45,7 @@ src_compile() {
 		TARGET="${TARGET}-min"
 	fi
 
-	gulp vscode-${TARGET} || die
+	npx gulp vscode-${TARGET} || die
 }
 
 src_install() {
