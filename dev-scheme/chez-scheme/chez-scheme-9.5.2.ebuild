@@ -10,19 +10,20 @@ SRC_URI="https://github.com/cisco/ChezScheme/releases/download/v9.5.2/csv9.5.2.t
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-IUSE="ncurses -x11"
+IUSE="threads -x11"
 
-DEPEND="ncurses? ( sys-libs/ncurses )"
+DEPEND="sys-libs/ncurses"
 RDEPEND="${DEPEND}"
 BDEPEND=""
 
 S=${WORKDIR}/csv9.5.2
 LDFLAGS=""
+OPTS=""
 
 src_configure() {
-	if use ncurses; then
-		LDFLAGS='-lncurses -ltinfo'
+	LDFLAGS='-lncurses -ltinfo'
+	if use threads; then
+		OPTS='--threads'
 	fi
-
-	./configure --installprefix=${D}/usr $(use_enable ncurses) $(use_enable x11) LDFLAGS='-lncurses -ltinfo'
+	./configure --installprefix=${D}/usr ${OPTS} $(use_enable x11) LDFLAGS="${LDFLAGS}"
 }
