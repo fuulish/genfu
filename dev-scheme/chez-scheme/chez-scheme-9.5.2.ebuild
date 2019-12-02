@@ -19,5 +19,5 @@ BDEPEND=""
 S=${WORKDIR}/csv9.5.2
 
 src_configure() {
-	./configure $(use_enable x11) LD_FLAGS='-lncurses -ltinfo'
+	./configure --installprefix=${D}/usr $(use_enable x11) LDFLAGS='-lncurses -ltinfo'
 }
