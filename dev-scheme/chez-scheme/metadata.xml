@@ -8,6 +8,5 @@
 </longdescription>
 <use>
     <flag name="x11">Build with x11 support.</flag>
-    <flag name="threads">Build with thread support.</flag>
 </use>
 </pkgmetadata>
