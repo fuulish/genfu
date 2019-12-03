@@ -8,5 +8,7 @@
 </longdescription>
 <use>
     <flag name="x11">Build with x11 support.</flag>
+    <flag name="ncurses">Build with ncurses support.</flag>
+    <flag name="threads">Build with threading support.</flag>
 </use>
 </pkgmetadata>
