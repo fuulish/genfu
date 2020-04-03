@@ -1,0 +1,14 @@
+--- vscode-1.43.2/product.json	2020-04-03 13:52:19.451156873 +0200
++++ vscode-1.43.2/product.json	2020-04-03 11:21:31.137857012 +0200
+@@ -22,5 +22,10 @@
+ 	"urlProtocol": "code-oss",
+ 	"extensionAllowedProposedApi": [
+ 		"ms-vscode.references-view"
+-	]
++	],
++	"extensionsGallery": {
++	"serviceUrl": "https://marketplace.visualstudio.com/_apis/public/gallery",
++	"cacheUrl": "https://vscode.blob.core.windows.net/gallery/index",
++	"itemUrl": "https://marketplace.visualstudio.com/items"
++	}
+ }
